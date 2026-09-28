@@ -8,11 +8,11 @@
         "build": "electron-vite build",
         "preview": "electron-vite preview",
         "test": "vitest run",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "dist": "electron-builder"
     },
     "dependencies": {
         "better-sqlite3": "latest",
-        "electron": "latest",
         "electron-vite": "latest",
         "react": "latest",
         "react-dom": "latest",
@@ -24,9 +24,21 @@
         "@types/react": "latest",
         "@types/react-dom": "latest",
         "@vitejs/plugin-react": "^4.5.2",
+        "electron": "^44.4.5",
+        "electron-builder": "^26.15.3",
         "eslint": "latest",
         "typescript": "latest",
         "vite": "^7.3.6",
         "vitest": "latest"
+    },
+    "build": {
+        "appId": "com.signaldesk.news",
+        "productName": "Signal Desk",
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "target": "nsis"
+        }
     }
 }

@@ -1,0 +1,32 @@
+{
+    "name": "desktop-news-hub",
+    "version": "0.1.0",
+    "private": true,
+    "main": "out/main/index.js",
+    "scripts": {
+        "dev": "electron-vite dev",
+        "build": "electron-vite build",
+        "preview": "electron-vite preview",
+        "test": "vitest run",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "better-sqlite3": "latest",
+        "electron": "latest",
+        "electron-vite": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "rss-parser": "latest"
+    },
+    "devDependencies": {
+        "@types/better-sqlite3": "latest",
+        "@types/node": "latest",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "@vitejs/plugin-react": "^4.5.2",
+        "eslint": "latest",
+        "typescript": "latest",
+        "vite": "^7.3.6",
+        "vitest": "latest"
+    }
+}

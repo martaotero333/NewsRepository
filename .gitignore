@@ -1,0 +1,9 @@
+node_modules/
+app/node_modules/
+app/out/
+app/dist/
+*.log
+.env*
+coverage/
+Thumbs.db
+.DS_Store

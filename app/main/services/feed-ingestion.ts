@@ -2,7 +2,12 @@ import Parser from 'rss-parser';
 import { createHash } from 'node:crypto';
 import type { NewsItem, NewsSource } from '../../shared/models/types';
 
-const parser = new Parser();
+const parser = new Parser({
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36',
+    Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*'
+  }
+});
 
 export async function fetchFeed(source: NewsSource): Promise<NewsItem[]> {
   const feed = await parser.parseURL(source.url);

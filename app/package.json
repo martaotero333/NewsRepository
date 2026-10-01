@@ -1,6 +1,6 @@
 {
     "name": "desktop-news-hub",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "private": true,
     "main": "out/main/index.js",
     "scripts": {
@@ -33,12 +33,21 @@
     },
     "build": {
         "appId": "com.signaldesk.news",
-        "productName": "Signal Desk",
+        "productName": "NewsPop",
         "directories": {
             "output": "dist"
         },
         "win": {
+            "icon": "build/icon.ico",
             "target": "nsis"
+        },
+        "nsis": {
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "NewsPop",
+            "installerIcon": "build/icon.ico",
+            "uninstallerIcon": "build/icon.ico",
+            "installerHeaderIcon": "build/icon.ico"
         }
     }
 }

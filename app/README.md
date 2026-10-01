@@ -18,6 +18,18 @@ npm test
 npm run build
 ```
 
+## Windows installer
+
+Build the Windows installer with:
+
+```powershell
+npm run dist -- --win nsis
+```
+
+The installer creates desktop and Start Menu shortcuts named NewsPop and uses the custom icon in `build/icon.ico`. The source artwork is `build/newspop-icon.svg`.
+
+The source form includes a curated list of national Spanish, international, and regional Spanish RSS feeds. The manual URL form remains available for any other RSS or Atom feed.
+
 The app stores its SQLite database in Electron's user data directory. Add feed URLs from the left sidebar, refresh sources manually, and use the article actions to mark stories read or save them.
 
 ## Structure

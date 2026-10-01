@@ -58,6 +58,9 @@ button { cursor: pointer; }
 .remove:hover, .remove:focus-visible { color: var(--coral); }
 .add-source { border-top-color: var(--line); }
 .add-source input { border: 1px solid #d8d8d8; border-radius: 3px; background: #fff; color: var(--ink); }
+.add-source select { display: block; width: 100%; margin: 8px 0; padding: 10px; border: 1px solid #d8d8d8; border-radius: 3px; background: #fff; color: var(--ink); font-size: 11px; }
+.add-source select:focus { border-color: var(--blue); outline: 2px solid #1769aa1c; }
+.add-source button:disabled { opacity: .48; cursor: not-allowed; }
 .add-source input::placeholder, .search input::placeholder { color: #858585; }
 .add-source input:focus { border-color: var(--blue); box-shadow: 0 0 0 2px #1769aa1c; }
 .add-source button { border: 1px solid var(--green); border-radius: 3px; color: var(--green); background: #f2faf5; }
@@ -103,9 +106,46 @@ button { cursor: pointer; }
 .saved-tag { padding: 3px 7px; border-radius: 3px; color: var(--amber); background: #fff6e5; }
 .article h3 { color: var(--ink); letter-spacing: 0; }
 .article p { color: #555; }
+.article-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .article-actions a, .article-actions button { color: #555; }
 .article-actions a { color: var(--blue); }
 .article-actions a:hover, .article-actions button:hover { color: var(--coral); }
+.favorite-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
+  border: 1px solid #d8d8d8;
+  border-radius: 999px;
+  background: #fff;
+  color: #a0a0a0;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.favorite-toggle span {
+  display: inline-block;
+  font-size: 1.1rem;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+.favorite-toggle:hover {
+  border-color: #e7b938;
+  color: #d8a41d;
+  background: #fff8e2;
+  transform: translateY(-1px);
+}
+.favorite-toggle.active {
+  border-color: #e7b938;
+  background: #fff1a8;
+  color: #d89d00;
+  box-shadow: inset 0 0 0 1px rgba(216, 157, 0, .18);
+}
+.favorite-toggle:focus-visible {
+  outline: 2px solid #f1d36b;
+  outline-offset: 2px;
+  border-color: #d89d00;
+}
 .empty { border-color: #d7d7d7; color: var(--muted); }
 .empty span { color: var(--teal); }
 .empty h3 { color: var(--ink); }

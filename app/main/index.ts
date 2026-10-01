@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import { join } from 'node:path';
 import { DataRepository } from './services/data-repository';
+import { migrateUserData } from './services/user-data-migration';
 import { registerNewsSourceHandlers } from './ipc/news-sources';
 import { registerArticleHandlers } from './ipc/articles';
 import { refreshAll } from './services/feed-refresh';
@@ -9,12 +10,20 @@ import { registerNotificationHandlers } from './ipc/notifications';
 let repository: DataRepository;
 
 function createWindow() {
-  const window = new BrowserWindow({ width: 1440, height: 900, minWidth: 900, minHeight: 650, webPreferences: { preload: join(__dirname, '../preload/index.js'), contextIsolation: true, nodeIntegration: false } });
+  const window = new BrowserWindow({ width: 1440, height: 900, minWidth: 900, minHeight: 650, icon: join(__dirname, '../../build/icon.ico'), webPreferences: { preload: join(__dirname, '../preload/index.js'), contextIsolation: true, nodeIntegration: false } });
   if (process.env.ELECTRON_RENDERER_URL) window.loadURL(process.env.ELECTRON_RENDERER_URL); else window.loadFile(join(__dirname, '../renderer/index.html'));
 }
 
 app.whenReady().then(() => {
-  repository = new DataRepository(join(app.getPath('userData'), 'signal-desk.sqlite'), join(__dirname, '../../database/schema.sql'));
+  const userDataDirectory = app.getPath('userData');
+  const legacyProfileDirectory = join(app.getPath('appData'), 'Signal Desk');
+  migrateUserData({
+    legacyProfilePath: legacyProfileDirectory,
+    destinationProfilePath: userDataDirectory,
+    legacyDatabasePath: join(legacyProfileDirectory, 'signal-desk.sqlite'),
+    destinationDatabasePath: join(userDataDirectory, 'signal-desk.sqlite')
+  });
+  repository = new DataRepository(join(userDataDirectory, 'signal-desk.sqlite'), join(__dirname, '../../database/schema.sql'));
   registerNewsSourceHandlers(repository);
   registerArticleHandlers(repository);
   registerNotificationHandlers(repository);

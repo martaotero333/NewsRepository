@@ -35,13 +35,17 @@ describe('article history persistence', () => {
     }));
 
     repository.saveArticles(articles);
-    repository.setArticleState('article-0', { isRead: true, isSaved: true });
+    repository.setArticleState('article-0', { isSaved: true });
+
+    const favoriteArticle = repository.listArticles().find(article => article.id === 'article-0');
+    expect(favoriteArticle).toMatchObject({ isRead: false, isSaved: true });
+
     repository.close();
     repository = new DataRepository(databasePath, schemaPath);
 
     const history = repository.listArticles();
     const oldestArticle = history.find(article => article.id === 'article-0');
     expect(history).toHaveLength(501);
-    expect(oldestArticle).toMatchObject({ isRead: true, isSaved: true });
+    expect(oldestArticle).toMatchObject({ isRead: false, isSaved: true });
   });
 });
